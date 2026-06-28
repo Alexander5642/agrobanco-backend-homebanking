@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecreto123';
 
-exports.signIn = async (email, password) => {
-  const { rows } = await pool.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+exports.signIn = async (identifier, password) => {
+  const { rows } = await pool.query('SELECT * FROM usuarios WHERE email = $1 OR dni = $1', [identifier]);
   if (rows.length === 0) throw new Error('Credenciales incorrectas. Inténtalo nuevamente.');
   
   const user = rows[0];
