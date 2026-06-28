@@ -23,6 +23,25 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.register = async (req, res) => {
+  try {
+    const userData = req.body;
+
+    if (!userData.email || !userData.password || !userData.dni) {
+      return res.status(400).json({
+        success: false,
+        message: 'Faltan datos obligatorios para el registro'
+      });
+    }
+
+    const resultado = await authService.register(userData);
+    res.json({ success: true, data: resultado });
+
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 exports.logout = async (req, res) => {
   try {
     await authService.logout();

@@ -18,6 +18,20 @@ exports.login = async (email, password) => {
   };
 };
 
+exports.register = async (userData) => {
+  const data = await authRepository.signUp(userData);
+
+  return {
+    usuario: {
+      id:     data.user.id,
+      email:  data.user.email,
+      nombre: data.user.user_metadata?.nombres || 'Cliente',
+      rol:    data.user.role
+    },
+    token: data.session.access_token
+  };
+};
+
 exports.logout = async () => {
   await authRepository.signOut();
 };
