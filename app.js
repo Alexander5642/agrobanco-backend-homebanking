@@ -6,6 +6,7 @@ const authRoutes = require('./src/routes/authRoutes');
 const cuentaRoutes = require('./src/routes/cuentaRoutes');
 const operacionRoutes = require('./src/routes/operacionRoutes');
 const creditoRoutes = require('./src/routes/creditoRoutes');
+const contactoRoutes = require('./src/routes/contactoRoutes');
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/cuentas', cuentaRoutes);
 app.use('/api/operaciones', operacionRoutes);
 app.use('/api/creditos', creditoRoutes);
+app.use('/api/contactos', contactoRoutes);
 
 app.get('/', (req, res) => {
   res.json({ mensaje: 'API Portal Mi Banco funcionando correctamente' });
